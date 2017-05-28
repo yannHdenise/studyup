@@ -1,2 +1,2 @@
-# studyup
-hackathon challenge for our webeng class
+# StudyUPApp
+Hackathon Challenge (CMSC126)

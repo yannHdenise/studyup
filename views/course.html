@@ -1,0 +1,250 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Courses</title>
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/bootstrap-table.min.css">
+
+    <style type="text/css">
+        .btn-submit {
+          margin-top: 10px;
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
+
+        .btn-edit {
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
+
+        .btn-submit:hover {
+          opacity: 1;
+          text-decoration: none;
+        }
+        .navbar-brand:hover{
+          font-weight: bold;
+        }
+        .navbar-default {
+          background-color: #dbedff;
+        }
+        .alert-info{
+          background-color: #ebd9e5;
+          opacity: 0.4;
+        }
+		h2 {
+		  text-align: center;
+		}
+		.table-final{
+			height:auto !important;
+		}
+
+		table caption {
+			padding: .5em 0;
+		}
+
+		@media screen and (max-width: 767px) {
+		  table caption {
+		    border-bottom: 1px solid #ddd;
+		  }
+		}
+
+		.p {
+		  text-align: center;
+		  padding-top: 140px;
+		  font-size: 14px;
+		}
+
+		.iframe-container {    
+		    padding-bottom: 60%;
+		    padding-top: 30px; height: 0; overflow: hidden;
+		}
+		 
+		.iframe-container iframe,
+		.iframe-container object,
+		.iframe-container embed{
+		    position: absolute;
+		    top: 0;
+		    left: 0;
+		    width: 100%;
+		    height: 100%;
+		}
+
+		.modal.in .modal-dialog {
+		  transform: none; /*translate(0px, 0px);*/
+		}
+
+		input[type=text] {
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 20px;
+
+  /*   text-align:center;*/
+
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 70%;
+}
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/profile">STUDY UP</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+               		 <li><a href="/profile">PROFILE</a></li>
+                	<li><a href="/course">FILES</a></li>
+                    <li><a href="/signout">SIGN OUT</a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+	  	<div class="row">
+		    <div class="col-xs-12">
+
+		    	<form align="middle" action="/course" method="get" enctype="multipart/form-data">
+         
+                        <label for="course_number">Course Code</label>
+                          <select class="form-control" id="course_number" name="course_code">
+                          <option value ="ALL">ALL</option>
+                            <option value ="BROADCAST SPEECH AND PERFORMANCE">BROADCAST SPEECH AND PERFORMANCE</option>
+                            <option value ="BIOLOGY">BIOLOGY</option>
+                            <option value ="BUSINESS MANAGEMENT">BUSINESS MANAGEMENT</option>
+                            <option value ="CEBUANO">CEBUANO</option>
+                            <option value ="CHEMISTRY">CHEMISTRY</option>
+                            <option value ="COMPUTER SCIENCE">COMPUTER SCIENCE</option>
+                            <option value ="COMMUNICATION">COMMUNICATION</option>
+                            <option value ="DESIGN">DESIGN</option>
+                            <option value ="DEVT COMMUNICATION">DEVT COMMUNICATION</option>
+                            <option value ="ECONOMICS">ECONOMICS</option>
+                            <option value ="FINE ARTS">FINE ARTS</option>
+                            <option value ="GEOGRAPHY">GEOGRAPHY</option>
+                            <option value ="GEOLOGY">GEOLOGY</option>
+                            <option value ="HISTORY">HISTORY</option>
+                            <option value ="HUMANITIES">HUMANITIES</option>
+                            <option value ="NATURAL SCIENCE">NATURAL SCIENCE</option>
+                            <option value ="JAPANESE">JAPANESE</option>
+                            <option value ="JOURNALISM">JOURNALISM</option>
+                            <option value ="LITERATURE">LITERATURE</option>
+                            <option value ="MATHEMATICS">MATHEMATICS</option>
+                            <option value ="MANAGEMENT">MANAGEMENT</option>
+                            <option value ="NSTP CWTS">NSTP CWTS</option>
+                            <option value ="PHYSICAL EDUCATION">PHYSICAL EDUCATION</option>
+                            <option value ="PHILOSOPHY">PHILOSOPHY</option>
+                            <option value ="PHYSICS">PHYSICS</option>
+                            <option value ="PI">PI</option>
+                            <option value ="POLITICAL SCIENCE">POLITICAL SCIENCE</option>
+                            <option value ="PSYCHOLOGY">PSYCHOLOGY</option>
+                            <option value ="SFA">SFA</option>
+                            <option value ="SOCIAL SCIENCE">SOCIAL SCIENCE</option>
+                            <option value ="SOCIOLOGY">SOCIOLOGY</option>
+                            <option value ="STATISTICS">STATISTICS</option>
+                            <option value ="SCIENCE, TECHNOLOGY AND SOCIETY">SCIENCE, TECHNOLOGY AND SOCIETY</option>
+                            <option value ="TFA">TFA</option>
+                            <option value ="THEATER">THEATER</option>
+                            <option value ="VISUAL COMMUNICATION">VISUAL COMMUNICATION</option>
+                            <option value ="ZOOLOGY">ZOOLOGY</option>
+                          </select>
+                      
+                        <button class="btn btn-submit">Search</button>
+
+                    </form>
+		    </div>
+	  	</div>
+	</div>
+  
+
+  
+
+	<div class="container">
+	  <div class="row">
+	    <div class="col-xs-12">
+	      <div class=" table-final">
+	        <table data-toggle="table" data-sort-name="date" data-sort-order="desc" class = "table-final">
+			    <thead>
+					<tr>
+						<th data-field="subject" data-sortable="true"> Subject </th>
+						<th data-field="description" data-sortable="true"> Description </th>
+						<th data-field="date" data-sortable="true"> Date Posted </th>
+						<th data-field="file" data-sortable="true"> File </th>
+                        <th></th>
+					</tr>
+				</thead>
+	          <tbody>
+
+	            {% for file in files %}
+	            <tr>
+				  <td>{{ file.course_num }}</td>
+	              <td>{{ file.description }}</td>
+	              <td>{{ file.createdAt }}</td>
+	              <td><a href="{{file.f_name}}">file</a></td>
+                  <td><form action="/comments" method="get"><input type="hidden" name="id" value="{{file.id}}"><button class="btn btn-edit">Comment</button></form></td>
+				<tr />
+				{% endfor %}
+
+
+	            <!--<tr>
+	              <td>CMSC123</td>
+	              <td>7/6/17</td>
+	              <td>Notes for Quiz 5</td>
+	              <td><a href="http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf">sample.pdf</a></td>
+	            </tr>-->
+
+
+	          </tbody>
+	          
+	        </table>
+	      </div><!--end of .table-responsive-->
+	    </div>
+	  </div>
+	</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+    <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="/static/bootstrap.js"></script>
+
+</body>
+
+</html>

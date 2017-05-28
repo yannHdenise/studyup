@@ -1,0 +1,7 @@
+{
+	"development":  {
+		"url": "postgres://study:study@localhost:5432/study",
+		"dialect": "pg"
+	}
+
+}

@@ -1,0 +1,135 @@
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Comments</title>
+    <!-- BOOTSTRAP STYLE SHEET -->
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="/static/bootstrap.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <style type="text/css">
+        .btn-submit {
+          margin-top: 10px;
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
+
+        .btn-delete {
+          padding-top: 5px;
+          background-color: #ebd9e5;
+          color:black;
+          opacity: 0.6;
+        }
+        .btn-submit:hover {
+          opacity: 1;
+          text-decoration: none;
+        }
+        .navbar-brand:hover{
+          font-weight: bold;
+        }
+        .navbar-default {
+          background-color: #dbedff;
+        }
+        .alert-info{
+          background-color: #ebd9e5;
+          opacity: 0.4;
+        }
+
+        .panel-center{
+          text-align: center;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/profile">STUDY UP</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                <li><a href="/profile">PROFILE</a></li>
+                  <li><a href="/course">FILES</a></li>
+                    <li><a href="/signout">SIGN OUT</a></li>
+                    
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-body panel-center">
+          {{file.course_num}} || <a href="{{ file.f_name }}">Link to File</a> || {{file.description}}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-success ">
+          <div class="panel-heading">
+            <h3 class="panel-title">Post your feedback:</h3>
+          </div>
+
+          <div class="panel-body">
+            <form action="postcomment" method="post">
+              <div>
+                <textarea name="content" id="content" class="form-control" placeholder="Please write your comments here." required></textarea>
+                <input type="hidden" name="name" id="name" class="form-control" value="{{user}}">
+                <input type="hidden" name="file_id" id="file_id" class="form-control" value="{{file.id}}">
+                <button class="btn btn-submit">Comment</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% for comment in comments %}
+    <div class="container">
+      <div class="col-md-8 col-md-offset-2">
+
+        <div class="panel panel-default ">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{comment.name}}</h3>
+          </div>
+
+          <div class="panel-body">
+            {{comment.content}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+    <!-- NAVBAR CODE END -->
+
+
+
+
+    <!-- REQUIRED SCRIPTS FILES -->
+    <!-- CORE JQUERY FILE -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <!-- REQUIRED BOOTSTRAP SCRIPTS -->
+    <script src="/static/bootstrap.js"></script>
+</body>
+
+</html>
