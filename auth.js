@@ -33,8 +33,19 @@ router.post('/signup', function(req, res) {
             salt: salt,
             name: name
         }).then(function(response) {
-            req.flash('signUpMessage', 'Signed up successfully!');
-            return res.redirect('/');
+            const data = response.get({plain:true});
+            console.log("this is the data", data);
+
+            File.findAll({ where: {user_id:data.id} }).then(function(results) {
+                return res.render('profile.html', {
+                    files: results,
+                    user: data
+                });
+            });
+
+            // req.flash('signUpMessage', 'Signed up successfully!');
+            // console.log(response);
+            // return res.direct('/', data);
         });
 
     });
