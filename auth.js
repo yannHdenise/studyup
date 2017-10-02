@@ -9,7 +9,7 @@ const router = new express.Router();
 router.post('/signup', function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
-    const confirmation = req.body.confirmation;
+    const confirmPassword = req.body.confirmPassword;
     const name = req.body.name;
 
     User.findOne({ where: { email: email } }).then(function(user) {
@@ -17,7 +17,7 @@ router.post('/signup', function(req, res) {
             req.flash('signUpMessage', 'Email is already in use.');
             return res.redirect('/');
         }
-        if (password !== confirmation) {
+        if (password !== confirmPassword) {
             req.flash('signUpMessage', 'Passwords do not match.');
             return res.redirect('/');
         }
@@ -42,10 +42,6 @@ router.post('/signup', function(req, res) {
                     user: data
                 });
             });
-
-            // req.flash('signUpMessage', 'Signed up successfully!');
-            // console.log(response);
-            // return res.direct('/', data);
         });
 
     });
@@ -56,6 +52,7 @@ router.post('/signin',  function(req, res) {
     const email = req.body.email;
     const password = req.body.password;
     const remember = req.body.remember;
+    const MAXAGE = 1000 * 60 * 60;
 
     User.findOne({ where: { email: email } }).then(function(user) {
         if (user === null) {
@@ -72,7 +69,7 @@ router.post('/signin',  function(req, res) {
         req.flash('statusMessage', 'Signed in successfully!');
         req.session.currentUser = user.email;
         if (remember) {
-            req.session.cookie.maxAge = 1000 * 60 * 60;
+            req.session.cookie.maxAge = MAXAGE;
         }
         res.redirect('/profile');
     });
