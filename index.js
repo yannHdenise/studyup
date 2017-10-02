@@ -103,14 +103,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/course', requireSignedIn, function(req, res) {
-	if (!req.query.course_code || req.query.course_code == "ALL"){
+	const ALL = "ALL";
+	
+	if (!req.query.course_code || req.query.course_code == ALL){
 		File.findAll().then(function(results) {
 		res.render('course.html', {
 			files:results
 		});
 	});
 
-	}else{
+	} else {
 		File.findAll({ where: {course:req.query.course_code} }).then(function(results) {
 		res.render('course.html', {
 			files:results
@@ -128,7 +130,6 @@ app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
 			res.redirect('/profile');
-			console.log("HAHAA " + user.avatar);
 		}); 
 	});
 });
