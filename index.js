@@ -56,9 +56,7 @@ app.get('/profile', requireSignedIn, function(req, res) {
 });
 
 app.get('/comments', requireSignedIn, function(req, res) {
-	const email =req.user.email;
-	console.log("THIS IS THE FILE ID" + req.query.id);
-
+	
 	File.findOne({ where: {id:req.query.id} }).then(function(file) {
 		Comment.findAll({where: {file_id:req.query.id} }).then(function(results) {
 			res.render('comments.html', {
@@ -73,10 +71,6 @@ app.get('/comments', requireSignedIn, function(req, res) {
 });
 
 app.post('/postcomment', requireSignedIn, function(req, res) {
-
-	console.log(req.body.name + req.body.content + req.body.file_id);
-
-
 	Comment.create({
         name:req.body.name,
         content: req.body.content,
@@ -87,8 +81,6 @@ app.post('/postcomment', requireSignedIn, function(req, res) {
 });
 
 app.post('/delete', requireSignedIn, function(req, res) {
-	const email =req.user.email;
-
 	File.destroy({
 	    where: {
 	       id:req.body.id
