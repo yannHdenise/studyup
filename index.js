@@ -4,13 +4,14 @@ const File = require( './models' ).File;
 const User = require( './models' ).User;
 const Comment = require( './models' ).Comment;
 const flash = require( 'express-flash' );
-var bodyparser = require( 'body-parser' );
 const consolidate = require( 'consolidate' );
 const cookieparser = require( 'cookie-parser' );
 const session = require( 'express-session' );
 const middlewares = require( 'middlewares' );
 const multer = require( 'multer' );
 const path = require( 'path' );
+
+var bodyparser = require( 'body-parser' );
 var app = express();
 
 
@@ -66,28 +67,6 @@ app.get('/comments', requireSignedIn, function( req, res ) {
 });
 
 
-app.post('/postcomment', requireSignedIn, function( req, res ) {
-    Comment.create({
-        name: req.body.name,
-        content: req.body.content,
-        file_id: req.body.file_id
-    }).then(function( response ) {
-        return res.redirect( '/comments' + '?id=' + req.body.file_id );
-    });
-});
-
-
-app.post('/delete', requireSignedIn, function( req, res ) {
-	File.destroy({
-	    where: {
-	       id:req.body.id
-	    }
-	}).then(function( results ) {
-		res.redirect( '/profile' );
-	});
-});
-
-
 app.get('/', function( req, res ) {
 	res.render( 'index.html' );
 });
@@ -109,6 +88,28 @@ app.get('/course', requireSignedIn, function( req, res ) {
 			});
 		});
 	}	
+});
+
+
+app.post('/postcomment', requireSignedIn, function( req, res ) {
+    Comment.create({
+        name: req.body.name,
+        content: req.body.content,
+        file_id: req.body.file_id
+    }).then(function( response ) {
+        return res.redirect( '/comments' + '?id=' + req.body.file_id );
+    });
+});
+
+
+app.post('/delete', requireSignedIn, function( req, res ) {
+	File.destroy({
+	    where: {
+	       id:req.body.id
+	    }
+	}).then(function( results ) {
+		res.redirect( '/profile' );
+	});
 });
 
 
@@ -161,6 +162,7 @@ function requireSignedIn( req, res, next ) {
     if ( !req.session.currentUser ) {
         return res.redirect( '/' );
     }
+
     next();
 }
 
