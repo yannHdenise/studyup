@@ -18,21 +18,18 @@ var app = express();
 app.engine('html', consolidate.nunjucks);
 app.set('views', './views');
 
-// app.use(bodyparser.urlencoded());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(cookieparser('secret-cookie'));
 app.use(session({ resave: false, saveUninitialized: false, secret: 'secret-cookie' }));
 app.use(flash());
-
 app.use('/static', express.static('./static'));
 app.use('/avatars', express.static('./avatar_pics'));
 app.use('/uploads', express.static('./uploads'));
-
 app.use(require('./auth'));
 
 var user = function retrieveSignedInUser(req, res, next) {
 
-  	const email = req.session.currentUser;
+    const email = req.session.currentUser;
 
     User.findOne({ where: { email:email } }).then(function(user) {
     	req.user = user;
@@ -47,11 +44,11 @@ app.get('/profile', requireSignedIn, function(req, res) {
 
 	User.findOne({ where: {email:email} }).then(function(user) {
 		File.findAll({ where: {user_id:req.user.id} }).then(function(results) {
-		res.render('profile.html', {
-			files:results,
-			user: user
+			res.render('profile.html', {
+				files:results,
+				user: user
+			});
 		});
-	});
 	});
 });
 
@@ -71,7 +68,7 @@ app.get('/comments', requireSignedIn, function(req, res) {
 });
 
 app.post('/postcomment', requireSignedIn, function(req, res) {
-	Comment.create({
+    Comment.create({
         name:req.body.name,
         content: req.body.content,
         file_id: req.body.file_id
@@ -99,17 +96,17 @@ app.get('/course', requireSignedIn, function(req, res) {
 	
 	if (!req.query.course_code || req.query.course_code == ALL){
 		File.findAll().then(function(results) {
-		res.render('course.html', {
-			files:results
+			res.render('course.html', {
+				files:results
 		});
 	});
 
 	} else {
 		File.findAll({ where: {course:req.query.course_code} }).then(function(results) {
-		res.render('course.html', {
-			files:results
+			res.render('course.html', {
+				files:results
+			});
 		});
-	});
 	}	
 });
 
@@ -119,6 +116,7 @@ const avatarpic = multer({dest: './avatar_pics'})
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single('avatar'), function(req, res){
 	const email = req.user.email;
+	
 	User.findOne({ where: { email: email } }).then(function(user) {
 		user.update({avatar: '/avatars/' + req.file.filename}).then(function(){
 			res.redirect('/profile');
