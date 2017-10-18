@@ -61,6 +61,7 @@ router.post('/signin',  function(req, res) {
         }
 
         const match = bcrypt.compareSync(password, user.password);
+        
         if (!match) {
             req.flash('signInMessage', 'Incorrect password.');
             return res.redirect('/');
