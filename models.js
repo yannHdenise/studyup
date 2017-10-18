@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize');
-const database = require('./database');
+const Sequelize = require( 'sequelize' );
+const database = require( './database' );
 
-const User= database.define('users', {
+const User = database.define( 'users', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -13,7 +13,7 @@ const User= database.define('users', {
         unique: true,
         allowNull: false
     },
-    name:{
+    name: {
         type: Sequelize.STRING,
     },
     password: {
@@ -29,21 +29,20 @@ const User= database.define('users', {
 });
 
 
-
-const File = database.define('files', {
+const File = database.define( 'files', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
-    f_name:{
+    f_name: {
         type: Sequelize.STRING,
     },
-    course:{
+    course: {
         type: Sequelize.STRING,
     }, 
-    course_num:{
+    course_num: {
         type: Sequelize.STRING,
     },
     user_id: {
@@ -61,14 +60,14 @@ const File = database.define('files', {
     timestamps: true
 });
 
-const Comment = database.define('comments', {
+const Comment = database.define( 'comments', {
     id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false
     },
-    content:{
+    content: {
         type: Sequelize.STRING,
     },
     file_id: {
@@ -86,9 +85,8 @@ const Comment = database.define('comments', {
     timestamps: true
 });
 
-File.belongsTo(User, { foreignKey: 'user_id' });
-
-Comment.belongsTo(File, { foreignKey: 'file_id' });
+File.belongsTo( User, { foreignKey: 'user_id' } );
+Comment.belongsTo( File, { foreignKey: 'file_id' } );
 
 database.sync();
 
