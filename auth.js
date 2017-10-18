@@ -24,10 +24,8 @@ router.post('/signup', function( req, res ) {
 
         const salt = bcrypt.genSaltSync();
         const hashedPassword = bcrypt.hashSync( password, salt );
-
- 
         
-       User.create({
+        User.create({
             email: email,
             password: hashedPassword,
             salt: salt,
@@ -69,9 +67,11 @@ router.post('/signin',  function( req, res ) {
 
         req.flash( 'statusMessage', 'Signed in successfully!' );
         req.session.currentUser = user.email;
+
         if ( remember ) {
             req.session.cookie.maxAge = MAXAGE;
         }
+        
         res.redirect( '/profile' );
     });
 });
