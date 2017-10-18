@@ -14,7 +14,6 @@ const path = require( 'path' );
 var bodyparser = require( 'body-parser' );
 var app = express();
 
-
 app.engine('html', consolidate.nunjucks);
 app.set('views', './views');
 
@@ -79,8 +78,8 @@ app.get('/course', requireSignedIn, function( req, res ) {
 		File.findAll().then(function( results ) {
 			res.render('course.html', {
 				files: results
+			});
 		});
-	});
 	} else {
 		File.findAll({ where: { course: req.query.course_code } }).then(function( results ) {
 			res.render('course.html', {

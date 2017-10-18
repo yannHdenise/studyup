@@ -13,10 +13,12 @@ router.post('/signup', function( req, res ) {
     const name = req.body.name;
 
     User.findOne({ where: { email: email } }).then(function( user ) {
+
         if ( user !== null ) {
             req.flash( 'signUpMessage', 'Email is already in use.' );
             return res.redirect( '/' );
         }
+        
         if ( password !== confirmPassword ) {
             req.flash( 'signUpMessage', 'Passwords do not match.' );
             return res.redirect( '/' );
@@ -71,7 +73,7 @@ router.post('/signin',  function( req, res ) {
         if ( remember ) {
             req.session.cookie.maxAge = MAXAGE;
         }
-        
+
         res.redirect( '/profile' );
     });
 });
