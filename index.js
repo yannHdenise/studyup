@@ -50,6 +50,7 @@ app.get('/profile', requireSignedIn, function( req, res ) {
 	});
 });
 
+
 app.get('/comments', requireSignedIn, function( req, res ) {
 	
 	File.findOne( { where: { id: req.query.id } } ).then(function( file ) {
@@ -64,6 +65,7 @@ app.get('/comments', requireSignedIn, function( req, res ) {
 	});
 });
 
+
 app.post('/postcomment', requireSignedIn, function( req, res ) {
     Comment.create({
         name: req.body.name,
@@ -73,6 +75,7 @@ app.post('/postcomment', requireSignedIn, function( req, res ) {
         return res.redirect( '/comments' + '?id=' + req.body.file_id );
     });
 });
+
 
 app.post('/delete', requireSignedIn, function( req, res ) {
 	File.destroy({
@@ -84,9 +87,11 @@ app.post('/delete', requireSignedIn, function( req, res ) {
 	});
 });
 
+
 app.get('/', function( req, res ) {
 	res.render( 'index.html' );
 });
+
 
 app.get('/course', requireSignedIn, function( req, res ) {
 	const ALL = "ALL";
@@ -106,7 +111,9 @@ app.get('/course', requireSignedIn, function( req, res ) {
 	}	
 });
 
+
 const avatarpic = multer({ dest: './avatar_pics' })
+
 
 app.post('/upload-avatar', requireSignedIn, avatarpic.single( 'avatar' ), function( req, res ){
 	const email = req.user.email;
@@ -117,6 +124,7 @@ app.post('/upload-avatar', requireSignedIn, avatarpic.single( 'avatar' ), functi
 		}); 
 	});
 });
+
 
 const storage = multer.diskStorage({
   destination: function( req, file, cb ) {
@@ -130,7 +138,9 @@ const storage = multer.diskStorage({
   }
 });
 
+
 const file_upload = multer({ storage:storage });
+
 
 app.post('/uploadFile', requireSignedIn, file_upload.single( 'file' ), function( req, res ){
 	const email = req.user.email;
