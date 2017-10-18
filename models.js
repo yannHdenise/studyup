@@ -60,6 +60,7 @@ const File = database.define( 'files', {
     timestamps: true
 });
 
+
 const Comment = database.define( 'comments', {
     id: {
         type: Sequelize.INTEGER,
@@ -84,6 +85,7 @@ const Comment = database.define( 'comments', {
 }, {
     timestamps: true
 });
+
 
 File.belongsTo( User, { foreignKey: 'user_id' } );
 Comment.belongsTo( File, { foreignKey: 'file_id' } );
