@@ -37,6 +37,7 @@ var user = function retrieveSignedInUser( req, res, next ) {
 
 app.use( user );
 
+// displays the profile of the currently signed in user
 app.get('/profile', requireSignedIn, function( req, res ) {
 	const email = req.user.email;
 
@@ -50,7 +51,7 @@ app.get('/profile', requireSignedIn, function( req, res ) {
 	});
 });
 
-
+// displays the comments about a particular file
 app.get('/comments', requireSignedIn, function( req, res ) {
 	
 	File.findOne( { where: { id: req.query.id } } ).then(function( file ) {
@@ -65,12 +66,12 @@ app.get('/comments', requireSignedIn, function( req, res ) {
 	});
 });
 
-
+// displays the default or the index page
 app.get('/', function( req, res ) {
 	res.render( 'index.html' );
 });
 
-
+// gets the course page
 app.get('/course', requireSignedIn, function( req, res ) {
 	const ALL = "ALL";
 	
@@ -90,7 +91,7 @@ app.get('/course', requireSignedIn, function( req, res ) {
 	}	
 });
 
-
+// enables the user to post a comment
 app.post('/postcomment', requireSignedIn, function( req, res ) {
     Comment.create({
         name: req.body.name,
@@ -101,7 +102,7 @@ app.post('/postcomment', requireSignedIn, function( req, res ) {
     });
 });
 
-
+// enables the user to delete a file
 app.post('/delete', requireSignedIn, function( req, res ) {
 	File.destroy({
 	    where: {
@@ -113,9 +114,9 @@ app.post('/delete', requireSignedIn, function( req, res ) {
 });
 
 
-const avatarpic = multer({ dest: './avatar_pics' })
+const avatarpic = multer({ dest: './avatar_pics' }) // object that contains the avatar file name and destination
 
-
+// enables the user to upload an avatar profile photo
 app.post('/upload-avatar', requireSignedIn, avatarpic.single( 'avatar' ), function( req, res ){
 	const email = req.user.email;
 	
@@ -142,7 +143,7 @@ const storage = multer.diskStorage({
 
 const file_upload = multer({ storage:storage }); // object that contains the file destination and name
 
-
+// enables the user to upload a file
 app.post('/uploadFile', requireSignedIn, file_upload.single( 'file' ), function( req, res ){
 	const email = req.user.email;
 	
@@ -157,8 +158,10 @@ app.post('/uploadFile', requireSignedIn, file_upload.single( 'file' ), function(
         });
 });
 
-
+// makes sure user is signed in
 function requireSignedIn( req, res, next ) {
+	
+    // if user is not signed in, user is redirected
     if ( !req.session.currentUser ) {
         return res.redirect( '/' );
     }
@@ -166,7 +169,7 @@ function requireSignedIn( req, res, next ) {
     next();
 }
 
-
+// notifies state of the server at port 3000
 app.listen(3000, function() {
 	console.log( 'Server is now running at port 3000' );
 });
