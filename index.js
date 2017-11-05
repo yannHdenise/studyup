@@ -37,7 +37,7 @@ var user = function retrieveSignedInUser( req, res, next ) {
 
 app.use( user );
 
-// displays the profile of the currently signed in user
+// Fetch user informaation
 app.get('/profile', requireSignedIn, function( req, res ) {
 	const email = req.user.email;
 
@@ -51,7 +51,7 @@ app.get('/profile', requireSignedIn, function( req, res ) {
 	});
 });
 
-// displays the comments about a particular file
+// Fetch comments about a particular file
 app.get('/comments', requireSignedIn, function( req, res ) {
 	
 	File.findOne( { where: { id: req.query.id } } ).then(function( file ) {
