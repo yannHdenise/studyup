@@ -139,7 +139,7 @@ const storage = multer.diskStorage({
 });
 
 
-const file_upload = multer({ storage:storage });
+const file_upload = multer({ storage:storage }); // object that contains the file destination and name
 
 
 app.post('/uploadFile', requireSignedIn, file_upload.single( 'file' ), function( req, res ){
