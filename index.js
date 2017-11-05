@@ -74,6 +74,7 @@ app.get('/', function( req, res ) {
 app.get('/course', requireSignedIn, function( req, res ) {
 	const ALL = "ALL";
 	
+	// if the user either does not specify a specific course code or chooses all courses
 	if ( !req.query.course_code || req.query.course_code == ALL ){
 		File.findAll().then(function( results ) {
 			res.render('course.html', {
