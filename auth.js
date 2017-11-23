@@ -24,8 +24,6 @@ router.post('/signup', function(req, res) {
 
         const salt = bcrypt.genSaltSync();
         const hashedPassword = bcrypt.hashSync(password, salt);
-
- 
         
        User.create({
             email: email,
