@@ -1,4 +1,11 @@
 language: javascript
 install: true 
 script: ant -version 
-notifications: email: recipients: - bconez@up.edu.ph - yannahdenise.oreo@gmail.com - gclunesa@up.edu.ph on_success: always # default: change on_failure: always # default: always
+notifications: 
+email: 
+  recipients: 
+    - bconez@up.edu.ph 
+    - yannahdenise.oreo@gmail.com 
+    - gclunesa@up.edu.ph 
+  on_success: always # default: change 
+  on_failure: always # default: always
